@@ -1,0 +1,15 @@
+Аина Омукова,cakecake199807@gmail.com,https://github.com/ainaomuk
+Алексей Ржевский,alexey.rzhevskiy@gmail.com,https://github.com/RzhevskiyAlexey
+Анна Бугельская,bugelskaya@yandex.ru,https://github.com/abugelskaya
+Сергей Колганов,serkolganov8@yandex.ru,https://github.com/SergeyKolganov1
+Кирилл Агафонов,agafonoff.k@yandex.ru,https://github.com/Agafonof
+Максим Маслов,max.tmfc@gmail.com,https://github.com/maxtmfc
+Найыр Монгуш,quatrbackn.9@gmail.com,https://github.com/qdiar
+Николай Стариков,starikoff00@gmail.com,https://github.com/Starikoff00
+Павел Захаров,gan021@mail.ru,https://github.com/space-ii
+Роман Шатиков,shatikov96@inbox.ru,https://github.com/RomanShatikov
+Светлана Николаева,sonikolaeva18@yandex.ru,https://github.com/SNikolaeva
+Тихон Стрижаков,odinokiy.mayak@gmail.com,https://github.com/ShumoIzolyator
+Евгений Казанцев,Kazanes111@mail.ru,https://github.com/kazantsev111
+Эмин Эминов,eminov9898@mail.ru,https://github.com/Emin9823
+Михаил Крылов,misha17_74@mail.ru,https://github.com/Xalucula
