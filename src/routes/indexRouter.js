@@ -1,7 +1,7 @@
 import express from 'express';
 import isAuth from '../middlewares/isAuth';
 import notAuth from '../middlewares/notAuth';
-import { User } from '../../db/models';
+import { User, Post } from '../../db/models';
 
 const router = express.Router();
 
@@ -19,7 +19,17 @@ router.get('/login', notAuth, (req, res) => {
 
 router.get('/students', isAuth, async (req, res) => {
   const students = await User.findAll();
-  res.render('Layout', { students });
+  const initState = { students };
+  res.render('Layout', initState);
+});
+
+router.get('/posts', isAuth, async (req, res) => {
+  const allPosts = await Post.findAll({
+    include: User,
+    order: [['updatedAt', 'DESC']],
+  });
+  const initState = { allPosts };
+  res.render('Layout', initState);
 });
 
 export default router;

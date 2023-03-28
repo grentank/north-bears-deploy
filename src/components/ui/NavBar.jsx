@@ -43,6 +43,11 @@ export default function NavBar({ user }) {
                 </a>
               </li>
               <li className="nav-item">
+                <a className="nav-link" href="/posts">
+                  Posts
+                </a>
+              </li>
+              <li className="nav-item">
                 <button type="button" className="nav-link" onClick={logoutHandler}>
                   Logout
                 </button>

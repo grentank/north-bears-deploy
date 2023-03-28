@@ -9,6 +9,7 @@ import indexRouter from './routes/indexRouter';
 import authRouter from './routes/authRouter';
 import resLocals from './middlewares/resLocals';
 import studentsRouter from './routes/studentsRouter';
+import postsRouter from './routes/postsRouter';
 
 require('dotenv').config();
 
@@ -41,6 +42,7 @@ app.use(resLocals);
 
 app.use('/api/auth', authRouter);
 app.use('/api/students', studentsRouter);
+app.use('/api/posts', postsRouter);
 app.use('/', indexRouter);
 
 app.listen(PORT, () => console.log(`App has started on port ${PORT}`));
