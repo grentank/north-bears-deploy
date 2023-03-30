@@ -18,18 +18,26 @@ router.get('/login', notAuth, (req, res) => {
 });
 
 router.get('/students', isAuth, async (req, res) => {
-  const students = await User.findAll();
-  const initState = { students };
-  res.render('Layout', initState);
+  try {
+    const students = await User.findAll();
+    const initState = { students };
+    res.render('Layout', initState);
+  } catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 router.get('/posts', isAuth, async (req, res) => {
-  const allPosts = await Post.findAll({
-    include: User,
-    order: [['updatedAt', 'DESC']],
-  });
-  const initState = { allPosts };
-  res.render('Layout', initState);
+  try {
+    const allPosts = await Post.findAll({
+      include: User,
+      order: [['updatedAt', 'DESC']],
+    });
+    const initState = { allPosts };
+    res.render('Layout', initState);
+  } catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 export default router;

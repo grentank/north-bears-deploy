@@ -21,7 +21,7 @@ postsRouter
     try {
       const { id } = req.params;
       const foundPost = await Post.findOne({ where: { id } });
-      const {title, body} = req.body;
+      const { title, body } = req.body;
       foundPost.title = title;
       foundPost.body = body;
       await foundPost.save();
@@ -32,8 +32,12 @@ postsRouter
     }
   })
   .get(async (req, res) => {
-    const foundPost = await Post.findOne({ where: { id: req.params.id } });
-    return res.json(foundPost);
+    try {
+      const foundPost = await Post.findOne({ where: { id: req.params.id } });
+      return res.json(foundPost);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   });
 
 postsRouter.post('/', isAuth, async (req, res) => {

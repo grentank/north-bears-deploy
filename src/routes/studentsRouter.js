@@ -28,13 +28,21 @@ studentsRouter
     }
   })
   .get(async (req, res) => {
-    const foundUser = await User.findOne({ where: { id: req.params.id } });
-    return res.json(foundUser);
+    try {
+      const foundUser = await User.findOne({ where: { id: req.params.id } });
+      return res.json(foundUser);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   });
 
 studentsRouter.post('/', async (req, res) => {
-  const newUser = await User.create(req.body);
-  return res.json(newUser);
+  try {
+    const newUser = await User.create(req.body);
+    return res.json(newUser);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
 });
 
 export default studentsRouter;

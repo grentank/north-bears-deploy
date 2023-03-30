@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "babel-node src/server.js",
-    "start": "webpack -d eval-source-map && babel-node src/server.js",
     "webpack": "webpack -wd eval-source-map",
     "launch": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && webpack -d eval-source-map && babel-node src/server.js",
-    "prep-db": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "prep-db": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "build": "webpack -d eval-source-map && babel src --copy-files --out-dir distr",
+    "start": "node distr/server.js"
   },
   "keywords": [],
   "author": "",
@@ -26,12 +27,12 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "morgan": "^1.10.0",
     "sequelize-cli": "^6.6.0",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@babel/cli": "^7.21.0",
     "axios": "^1.3.4",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
