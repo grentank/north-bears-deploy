@@ -21,26 +21,36 @@ postsRouter
     try {
       const { id } = req.params;
       const foundPost = await Post.findOne({ where: { id } });
-      const {title, body} = req.body;
+      const { title, body } = req.body;
       foundPost.title = title;
       foundPost.body = body;
       await foundPost.save();
-      return res.json(foundPost);
+      const newPostWithUser = await Post.findOne({
+        where: { id: foundPost.id },
+        include: ['User', 'likedBy'],
+      });
+      return res.json(newPostWithUser);
     } catch (error) {
       console.log(error);
       return res.sendStatus(500);
     }
   })
   .get(async (req, res) => {
-    const foundPost = await Post.findOne({ where: { id: req.params.id } });
+    const foundPost = await Post.findOne({
+      where: { id: req.params.id },
+      include: ['User', 'likedBy'],
+    });
     return res.json(foundPost);
   });
 
 postsRouter.post('/', isAuth, async (req, res) => {
   try {
     const { title, body } = req.body;
-    const newPost = await Post.create({ title, body, userId: req.session?.user?.id });
-    const newPostWithUser = await Post.findOne({ where: { id: newPost.id }, include: User });
+    const newPost = await Post.create({ title, body, authorId: req.session?.user?.id });
+    const newPostWithUser = await Post.findOne({
+      where: { id: newPost.id },
+      include: ['User', 'likedBy'],
+    });
     return res.json(newPostWithUser);
   } catch (error) {
     console.log(error);

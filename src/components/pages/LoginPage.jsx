@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function LoginPage() {
   const [errorState, setErrorState] = useState(null);
@@ -25,6 +25,14 @@ export default function LoginPage() {
       console.log(error);
     }
   };
+
+  const [styles, setStyles] = useState('form-control');
+
+  useEffect(() => {
+    if (inputGroup.password.length <= 3) setStyles('form-control is-invalid');
+    else setStyles('form-control is-valid');
+  }, [inputGroup.password]);
+
   return (
     <form onSubmit={submitHandler}>
       <div className="mb-3">
@@ -53,7 +61,7 @@ export default function LoginPage() {
             onChange={changeHandler}
             name="password"
             type="password"
-            className={inputGroup.password.length <= 3 ? 'form-control is-invalid' : 'form-control'}
+            className={styles}
             id="exampleInputPassword1"
           />
           <div id="validationServer03Feedback" className="invalid-feedback">

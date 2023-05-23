@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = {
   async up(queryInterface, Sequelize) {
     const response = await axios('https://jsonplaceholder.typicode.com/posts');
-    const posts = response.data.map(({ title, body, userId }) => ({ title, body, userId }));
+    const posts = response.data.map(({ title, body, userId }) => ({ title, body, authorId: userId }));
     await queryInterface.bulkInsert('Posts', posts, {});
   },
 

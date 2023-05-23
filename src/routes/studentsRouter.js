@@ -37,4 +37,9 @@ studentsRouter.post('/', async (req, res) => {
   return res.json(newUser);
 });
 
+studentsRouter.get('/', async (req, res) => {
+  const allUsers = await User.findAll();  
+  return res.json(allUsers);
+});
+
 export default studentsRouter;

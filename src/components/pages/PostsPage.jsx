@@ -28,6 +28,12 @@ export default function PostsPage({ allPosts, user }) {
     const response = await axios.patch(`/api/posts/${newPost.id}`, newPost);
     setPosts((prev) => prev.map((post) => (post.id === newPost.id ? response.data : post)));
   };
+  const likePostHandler = async (postId) => {
+    const response = await axios.post(`/api/like/post/${postId}`);
+    if (response.status === 200) {
+      setPosts((prev) => prev.map((post) => (post.id === postId ? response.data : post)));
+    }
+  };
   return (
     <>
       <div className="row">
@@ -38,7 +44,14 @@ export default function PostsPage({ allPosts, user }) {
       <div className="row">
         <div className="list-group">
           {posts.map((post) => (
-            <PostCard updatePostHandler={updatePostHandler} user={user} deletePostHandler={deletePostHandler} post={post} key={post.id} />
+            <PostCard
+              updatePostHandler={updatePostHandler}
+              user={user}
+              deletePostHandler={deletePostHandler}
+              post={post}
+              key={post.id}
+              likePostHandler={likePostHandler}
+            />
           ))}
         </div>
       </div>
