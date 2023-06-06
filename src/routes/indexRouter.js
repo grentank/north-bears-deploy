@@ -18,11 +18,15 @@ router.get('/login', notAuth, (req, res) => {
   res.render('Layout');
 });
 
-router.get('/students', isAuth, adminCheck, async (req, res) => {
-  const students = await User.findAll();
-  const initState = { students };
-  res.render('Layout', initState);
-});
+router.get(
+  '/students',
+  isAuth,
+  /* adminCheck, */ async (req, res) => {
+    const students = await User.findAll();
+    const initState = { students };
+    res.render('Layout', initState);
+  },
+);
 
 router.get('/posts', isAuth, async (req, res) => {
   const allPosts = await Post.findAll({

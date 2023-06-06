@@ -3,20 +3,22 @@ import Pencil from './icons/Pencil';
 import TrashCan from './icons/TrashCan';
 import HeartFilled from './icons/HeartFilled';
 import HeartHollow from './icons/HeartHollow';
+import SaveIcon from './icons/SaveIcon';
 
 export default function PostCard({
-  post: postFromArray,
+  post,
   deletePostHandler,
   user,
   updatePostHandler,
   likePostHandler,
 }) {
   const [editing, setEditing] = useState(null);
-  const [post, setPost] = useState(postFromArray);
-  const changeHandler = (e) => setPost((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const [postInput, setPostInput] = useState(post);
+  const changeHandler = (e) =>
+    setPostInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   useEffect(() => {
     if (editing === false) {
-      updatePostHandler(post);
+      updatePostHandler(postInput);
     }
   }, [editing]);
   return (
@@ -26,7 +28,7 @@ export default function PostCard({
           <input
             name="title"
             onChange={changeHandler}
-            value={post.title}
+            value={postInput.title}
             className="form-control"
           />
         ) : (
@@ -35,7 +37,12 @@ export default function PostCard({
         <small>{post.User?.username}</small>
       </div>
       {editing ? (
-        <textarea name="body" onChange={changeHandler} value={post.body} className="form-control" />
+        <textarea
+          name="body"
+          onChange={changeHandler}
+          value={postInput.body}
+          className="form-control"
+        />
       ) : (
         <p className="mb-1">{post.body}</p>
       )}
@@ -48,21 +55,27 @@ export default function PostCard({
         >
           <TrashCan />
         </button>
-        <button
-          onClick={() => setEditing(!editing)}
-          disabled={post.authorId !== user.id}
-          className="btn btn-info"
-          type="button"
-        >
-          <Pencil />
-        </button>
+        {editing ? (
+          <button
+            onClick={() => setEditing(!editing)}
+            disabled={post.authorId !== user.id}
+            className="btn btn-success"
+            type="button"
+          >
+            <SaveIcon />
+          </button>
+        ) : (
+          <button onClick={() => setEditing(!editing)} className="btn btn-info" type="button">
+            <Pencil />
+          </button>
+        )}
         <button
           onClick={() => likePostHandler(post.id)}
           className="btn btn-outline-secondary"
           type="button"
         >
-          {postFromArray.likedBy.length}{' '}
-          {postFromArray.likedBy.find((userFromLike) => userFromLike.id === user.id) ? (
+          {post.likedBy.length}{' '}
+          {post.likedBy.find((userFromLike) => userFromLike.id === user.id) ? (
             <HeartFilled />
           ) : (
             <HeartHollow />

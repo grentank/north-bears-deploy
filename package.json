@@ -8,8 +8,8 @@
     "dev": "babel-node src/server.js",
     "start": "webpack -d eval-source-map && babel-node src/server.js",
     "webpack": "webpack -wd eval-source-map",
-    "launch": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && webpack -d eval-source-map && babel-node src/server.js",
-    "prep-db": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "prep-db": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "launch": "npm run prep-db && npm start"
   },
   "keywords": [],
   "author": "",
